@@ -28,13 +28,13 @@ RUN set -eux; \
 # install GloriousEggroll's proton build
 RUN set -eux; \
     PROTON_GH_API="https://api.github.com/repos/GloriousEggroll/proton-ge-custom/releases/latest"; \
-    PROTON_TARBALL="$(wget -qO - "$PROTON_GH_API" | grep browser_download_url | cut -d\" -f4 | egrep .tar.gz)"; \
+    PROTON_TARBALL="$(wget -qO - "$PROTON_GH_API" | grep "browser_download_url.*\.tar\.gz" | cut -d\" -f4)"; \
     wget -qO - "$PROTON_TARBALL" | tar -xz -C /usr/local/bin --strip-components=1
 
 # install rcon cli
 RUN set -eux; \
     RCON_GH_API="https://api.github.com/repos/gorcon/rcon-cli/releases/latest"; \
-    RCON_TARBALL="$(wget -qO - "$RCON_GH_API" | grep tarball_url | cut -d\" -f4)"; \
+    RCON_TARBALL="$(wget -qO - "$RCON_GH_API" | grep "browser_download_url.*amd64_linux\.tar\.gz" | cut -d\" -f4)"; \
     wget -qO - "$RCON_TARBALL" | tar -xz -C /usr/local/bin --strip-components=1
 
 # clean up
